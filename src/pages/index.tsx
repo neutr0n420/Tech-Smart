@@ -22,15 +22,15 @@ export default function Home() {
         <label htmlFor="topic">Topic</label>
         <Input
           id="topic"
-          placeholder="Maths, SST, Science, Geography, English"
+          placeholder="Maths, SST, Science, Geography, English etc..." 
           onChange={(e) => console.log(e.target.value)}
         />
       </div>
       <div className="mt-10">
         <label htmlFor="grade">Grade</label>
-        <Select>
-          <SelectTrigger onChange={e => console.log(e.target)}>
-            <SelectValue placeholder="Grade"  onChange={e => console.log(e.target)}/>
+        <Select onValueChange={e => console.log(parseInt(e))}>
+          <SelectTrigger>
+            <SelectValue placeholder="Grade"/>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="1">1st</SelectItem>
