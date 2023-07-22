@@ -12,17 +12,24 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
+  const generateKey = () =>{
+    console.log("generated the backend code.")
+  }
   return (
     <main className="w-4/12 mt-56 ml-36">
       <div>
         <label htmlFor="topic">Topic</label>
-        <Input id="topic" placeholder="Maths, SST, Science, Geography, English" />
+        <Input
+          id="topic"
+          placeholder="Maths, SST, Science, Geography, English"
+          onChange={(e) => console.log(e.target.value)}
+        />
       </div>
       <div className="mt-10">
         <label htmlFor="grade">Grade</label>
         <Select>
-          <SelectTrigger>
-            <SelectValue placeholder="Grade" />
+          <SelectTrigger onChange={e => console.log(e.target)}>
+            <SelectValue placeholder="Grade"  onChange={e => console.log(e.target)}/>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="1">1st</SelectItem>
@@ -39,7 +46,7 @@ export default function Home() {
         </Select>
       </div>
       <Link href="/notes">
-       <Button className="mt-10">Generate</Button>
+        <Button className="mt-10" onClick={generateKey}>Generate</Button>
       </Link>
     </main>
   );
