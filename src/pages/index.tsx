@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -37,7 +38,9 @@ export default function Home() {
           </SelectContent>
         </Select>
       </div>
-      <Button className="mt-10">Generate</Button>
+      <Link href="/notes">
+       <Button className="mt-10">Generate</Button>
+      </Link>
     </main>
   );
 }
