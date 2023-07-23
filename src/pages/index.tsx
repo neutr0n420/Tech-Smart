@@ -21,6 +21,7 @@ export default function Home() {
         <label htmlFor="topic">Topic</label>
         <Input
           id="topic"
+          name="subject"
           placeholder="Maths, SST, Science, Geography, English etc..." 
           onChange={(e) => console.log(e.target.value)}
         />
