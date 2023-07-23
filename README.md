@@ -1,6 +1,7 @@
 # Teach Smart 
+- "Empowering Educators, Enriching Minds."
 
- Small Ai based application that will help teachers to revise their topic on last minute.
+- Small Ai based application that will help teachers to revise their topic on last minute.
 
 
 
