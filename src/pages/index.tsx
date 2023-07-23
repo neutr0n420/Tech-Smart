@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import axios from 'axios'
 import { useState , useCallback } from "react";
-import { generateKey } from "crypto";
+import { headers } from "next/dist/client/components/headers";
 
 
 export default function Home() {
@@ -22,14 +22,36 @@ export default function Home() {
   const [grade , setGrade] = useState()
   const [newObj , setNewObj] = useState({subject , grade})
   const backendUrl = 'http://localhost:3000/api/generate/route'
-  const GenerateKey = (event) =>{
+  const GenerateKey = (event:any) =>{
     event.preventDefault()
     console.log(event.target)
+    try {
+      const response =  fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ topic: subject, grade: grade }),
+      });
+
+
+      
+
+      
+     
+      
+    } catch(error:any) {
+      // Consider implementing your own error handling logic here
+      console.error(error);
+      alert(error.message);
+    }
   }
+console.log(Response) 
+const options = [1,2,3,4,5,6,7,8]
   
   return (
     <main className="w-4/12 mt-56 ml-36">
-       <form onSubmit={generateKey}>
+       <form onSubmit={GenerateKey}>
       <div>
         <label htmlFor="topic">Topic</label>
         <Input
@@ -39,6 +61,7 @@ export default function Home() {
           onChange={(e:any) => { setSubject(e.target.value) , console.log(subject)}}
           required
         />
+        <input className="outline w-"/>
       </div>
       <div className="mt-10">
         <label htmlFor="grade">Grade</label>
@@ -59,6 +82,16 @@ export default function Home() {
             <SelectItem value="10">10th</SelectItem>
           </SelectContent>
         </Select>
+
+        <select className="outline" >
+ 
+                    <option>Please choose one option</option>
+                    {options.map((option, index) => {
+                        return <option key={index} >
+                            {option}
+                        </option>
+                    })}
+                </select>
       </div>
       <Link href="/notes">
         <Button className="mt-10" type="submit">Generate</Button>
