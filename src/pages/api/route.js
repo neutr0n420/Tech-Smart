@@ -8,6 +8,17 @@ const openai = new OpenAIApi(config)
 
 export default async function (req, res){
   if(!config.apiKey){
-    res.status
+    res.status(500).json({
+      error: "Open API key is not configured"
+    })
+    return
+  }
+  const topic = req.body.topic || " "
+  const grade = req.body.grade || ""
+  if(topic == "" || grade == ""){
+    res.status(400).json({
+      error: "Please enter the valid topic/grade"
+    })
+    return
   }
 }
