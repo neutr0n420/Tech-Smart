@@ -25,9 +25,9 @@ export default async function handler(request: any , response: any) {
   try {
     const completion: any = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `make summary notes for the teacher of ${topic} for the grade of ${grade}, with the time stamp`,
+      prompt: generatePrompt(topic, grade),
       temperature: 0.8,
-      max_tokens:1000
+      max_tokens:3500
     });
 
     response.status(200).json({ result: completion.data.choices[0].text });
@@ -35,4 +35,17 @@ export default async function handler(request: any , response: any) {
     console.error(error);
     response.status(500).json({ error: error.message })
   }
+}
+
+const generatePrompt=(topic:string, grade:string)=>{
+  return(`
+  You are a teacher preparing a lesson plan for the topic of "${topic}" for grade "${grade}". Please provide explanations for the following subtopics with timestamps:
+
+1. Introduction to the topic - [00:00 - 05:00]
+2. Key concepts and definitions - [05:01 - 10:00]
+3. Examples and applications - [10:01 - 15:00]
+4. Related exercises and practice - [15:01 - 20:00]
+5. Summary and conclusion - [20:01 - 25:00]
+ 
+  `)
 }
