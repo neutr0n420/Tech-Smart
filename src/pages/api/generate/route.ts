@@ -38,13 +38,12 @@ export default async function handler(request: any , response: any) {
 }
 
 const generatePrompt=(topic:string, grade:string)=>{
-  return (
-    `You are a teacher preparing a lesson plan for the topic of "${topic}" for grade "${grade}". Please provide explanations for the following subtopics with timestamps:
+  return (`You are a teacher preparing a lesson plan for the topic of "${topic}" for grade "${grade}". Please provide explanations for the following subtopics with timestamps:
 
     1. Introduction to the topic - [00:00 - 05:00]
     2. Key concepts and definitions - [05:01 - 10:00]
     3. Examples and applications - [10:01 - 15:00]
     4. Related exercises and practice - [15:01 - 20:00]
-    5. Summary and conclusion - [20:01 - 25:00]`
-  )
+    5. Summary and conclusion - [20:01 - 25:00]`)
+    
 }

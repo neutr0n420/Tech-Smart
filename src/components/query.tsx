@@ -10,33 +10,31 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Button } from "./ui/button";
+import axios from 'axios'
 
 interface QueryFormProps { }
 
 const QueryForm: FC<QueryFormProps> = ({ }) => {
 	const [subject, setSubject] = useState<string>('')
 	const [grade, setGrade] = useState<string>('')
-
-	const generateKey = (e: FormEvent) => {
-		e.preventDefault()
-		console.log(e)
-		try {
-			const response = fetch("/api/generate", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ topic: subject, grade: grade }),
-			});
-		} catch (error: any) {
-			// Consider implementing your own error handling logic here
-			console.error(error);
-			alert(error.message);
+	const [notesAndShit , setNotes] = useState<string>('Hey Teacher We are working Together')
+	const baseUrl = '/api/generate/route'
+	const handleSubmit = async(e:any) => {
+		setNotes('Wait a Bit Im Thinking...')
+		e.preventDefault();
+		const newObj = {
+		topic: subject,
+		grade: grade
 		}
-	}
+		axios.post(baseUrl , newObj).then(res => {
+		console.log(res)
+		setNotes(res?.data?.result)
+		}).catch(err => console.error(err))
+		} 
+ 	 
 
 	return (
-		<form onSubmit={generateKey}>
+		<form onSubmit={handleSubmit}>
 			<div className="flex flex-col items-start md:flex-row md:items-center gap-4 mt-10">
 				<div>
 					<Label className="sr-only" htmlFor="topic">Topic</Label>
@@ -84,6 +82,10 @@ const QueryForm: FC<QueryFormProps> = ({ }) => {
 				<Button type="submit">Generate</Button>
 
 			</div>
+			<br/>
+			<br/>
+			<br/>
+			{notesAndShit}
 		</form>
 	)
 }
