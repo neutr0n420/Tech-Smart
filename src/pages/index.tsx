@@ -10,25 +10,39 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import axios from 'axios'
+import { useState , useCallback } from "react";
+import { generateKey } from "crypto";
+
 
 export default function Home() {
-  const generateKey = () =>{
-    console.log("generated the backend code.")
+
+  const [notes , setNotes] = useState([])
+  const [subject , setSubject] = useState('')
+  const [grade , setGrade] = useState()
+  const [newObj , setNewObj] = useState({subject , grade})
+  const backendUrl = 'http://localhost:3000/api/generate/route'
+  const GenerateKey = (event) =>{
+    event.preventDefault()
+    console.log(event.target)
   }
+  
   return (
     <main className="w-4/12 mt-56 ml-36">
+       <form onSubmit={generateKey}>
       <div>
         <label htmlFor="topic">Topic</label>
         <Input
           id="topic"
-          name="subject"
+          name="topic"
           placeholder="Maths, SST, Science, Geography, English etc..." 
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e:any) => { setSubject(e.target.value) , console.log(subject)}}
+          required
         />
       </div>
       <div className="mt-10">
         <label htmlFor="grade">Grade</label>
-        <Select onValueChange={e => console.log(parseInt(e))}>
+        <Select name="grade" onValueChange={(e:any) => {setGrade(e) , console.log(grade)}}>
           <SelectTrigger>
             <SelectValue placeholder="Grade"/>
           </SelectTrigger>
@@ -47,8 +61,9 @@ export default function Home() {
         </Select>
       </div>
       <Link href="/notes">
-        <Button className="mt-10" onClick={generateKey}>Generate</Button>
+        <Button className="mt-10" type="submit">Generate</Button>
       </Link>
+      </form>
     </main>
   );
 }
