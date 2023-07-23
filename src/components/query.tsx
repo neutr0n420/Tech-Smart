@@ -19,7 +19,7 @@ const QueryForm: FC<QueryFormProps> = ({ }) => {
 
 	const generateKey = (e: FormEvent) => {
 		e.preventDefault()
-		console.log(e.target)
+		console.log(e)
 		try {
 			const response = fetch("/api/generate", {
 				method: "POST",
@@ -37,7 +37,7 @@ const QueryForm: FC<QueryFormProps> = ({ }) => {
 
 	return (
 		<form onSubmit={generateKey}>
-			<div className="flex flex-row items-center gap-4 mt-10">
+			<div className="flex flex-col items-start md:flex-row md:items-center gap-4 mt-10">
 				<div>
 					<Label className="sr-only" htmlFor="topic">Topic</Label>
 
@@ -45,7 +45,10 @@ const QueryForm: FC<QueryFormProps> = ({ }) => {
 						id="topic"
 						name="topic"
 						placeholder="Maths, SST, Science, Geography, English etc..."
-						onChange={(e: any) => { setSubject(e.target.value), console.log(subject) }}
+						onChange={(e: any) => {
+							setSubject(e.target.value)
+							console.log(e.target.value)
+						}}
 						required
 					/>
 				</div>
