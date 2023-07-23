@@ -14,7 +14,6 @@ import Link from "next/link";
 export default function Home() {
   const generateKey = () =>{
     console.log("generated the backend code.")
-    window.print()
   }
   return (
     <main className="w-4/12 mt-56 ml-36">
